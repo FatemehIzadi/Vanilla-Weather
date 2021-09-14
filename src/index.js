@@ -13,6 +13,11 @@ let weekdays = [
   "Saturday"
 ];
 
+var unitTemp = {
+  unit: "c",
+  temp: 0
+};
+
 function getDateTime(response) {
   let unixTimeStamp = response.data.dt;
   let date = new Date(unixTimeStamp * 1000);
@@ -33,6 +38,9 @@ function weatherData(response) {
   weatherDescription = document.querySelector("#weather-description");
   weatherDescription.innerHTML = response.data.weather[0].main;
   let cityTemp = document.querySelector("#city-temp");
+  unitTemp.temp = Math.round(response.data.main.temp);
+  metricButton.style.fontWeight = "bold";
+  metricButton.style.fontSize = "12px";
   cityTemp.innerHTML = Math.round(response.data.main.temp);
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
@@ -73,3 +81,33 @@ function sayCurrentWeather(event) {
 }
 let currentButton = document.querySelector("#current-button");
 currentButton.addEventListener("click", sayCurrentWeather);
+
+let temp = document.querySelector("#city-temp");
+function changeToImperial(event) {
+  event.preventDefault();
+  if (unitTemp.unit === "c") {
+    unitTemp.temp = Math.round((unitTemp.temp * 9) / 5) + 32;
+    temp.innerHTML = unitTemp.temp;
+    imperialButton.style.fontWeight = "bold";
+    imperialButton.style.fontSize = "12px";
+    metricButton.style.fontWeight = "normal";
+    metricButton.style.fontSize = "10px";
+    unitTemp.unit = "f";
+  }
+}
+let imperialButton = document.querySelector("#imperial");
+imperialButton.addEventListener("click", changeToImperial);
+function changeToMetric(event) {
+  event.preventDefault();
+  if (unitTemp.unit === "f") {
+    unitTemp.temp = Math.round(((unitTemp.temp - 32) * 5) / 9);
+    temp.innerHTML = unitTemp.temp;
+    metricButton.style.fontWeight = "bold";
+    metricButton.style.fontSize = "12px";
+    imperialButton.style.fontWeight = "normal";
+    imperialButton.style.fontSize = "10px";
+    unitTemp.unit = "c";
+  }
+}
+let metricButton = document.querySelector("#metric");
+metricButton.addEventListener("click", changeToMetric);
