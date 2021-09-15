@@ -30,22 +30,44 @@ function getDateTime(response) {
   let day = document.querySelector("#day");
   day.innerHTML = weekDay;
 }
-function weatherData(response) {
+
+function getCity(response) {
   let cityName = document.querySelector("#city-name");
   if (city.toLowerCase !== "new york") country = response.data.sys.country;
   cityName.innerHTML = `${city.toUpperCase()}, ${country.toUpperCase()}`;
-  getDateTime(response);
+}
+
+function getIconDescription(response) {
+  let weatherIcon = document.querySelector("#weather-icon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
   weatherDescription = document.querySelector("#weather-description");
-  weatherDescription.innerHTML = response.data.weather[0].main;
+  weatherDescription.innerHTML = `${response.data.weather[0].description.toUpperCase()}`;
+}
+
+function getTemp(response) {
   let cityTemp = document.querySelector("#city-temp");
   unitTemp.temp = Math.round(response.data.main.temp);
   metricButton.style.fontWeight = "bold";
   metricButton.style.fontSize = "12px";
   cityTemp.innerHTML = Math.round(response.data.main.temp);
+}
+
+function getHumidityWindSpeed(response) {
   let humidity = document.querySelector("#humidity");
   humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
   let windSpeed = document.querySelector("#wind-speed");
-  windSpeed.innerHTML = `Wind Speed: ${response.data.wind.speed}km/H`;
+  windSpeed.innerHTML = `Wind Speed: ${response.data.wind.speed}mpH`;
+}
+function weatherData(response) {
+  getCity(response);
+  getDateTime(response);
+  getIconDescription(response);
+  getTemp(response);
+  getHumidityWindSpeed(response);
 }
 
 function sayWeather() {

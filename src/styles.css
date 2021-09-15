@@ -3,15 +3,34 @@
   border-radius: 5px;
   padding: 25px;
   border-radius: 10px;
-  max-width: 600px;
+  max-width: 90%;
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  background-color: #eceaea;
+}
+#city-name {
+  font-size: 30px;
+}
+.btn-primary {
+  background-color: #cbbde2;
+  color: #51484f;
+  border: none;
+}
+.btn-warning {
+  background-color: #b39ddb;
+  color: #51484f;
+  border: none;
+}
+.btn:hover {
+  background-color: #ffefff;
+  color: #563d7c;
 }
 body {
-  font-family: "Glory", sans-serif;
+  font-family: "Lora", serif;
+  background-color: #563d7c;
 }
 .navigation-items {
   list-style: none;
@@ -35,6 +54,9 @@ a {
   padding: 10px;
   width: 300px;
 }
+#icon {
+  display: inline;
+}
 .unit {
   font-size: 10px;
   background: none;
@@ -43,13 +65,16 @@ a {
   padding: 0;
   cursor: pointer;
 }
+#weather-description {
+  font-weight: bold;
+}
 .btn {
   height: 44px;
 }
 
 .nyc {
   padding: 30px;
-  color: #878792;
+  color: #51484f;
   font-weight: 100;
 }
 .weather-emoji {
