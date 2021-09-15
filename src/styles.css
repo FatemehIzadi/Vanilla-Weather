@@ -66,6 +66,7 @@ a {
   cursor: pointer;
 }
 #weather-description {
+  font-size: 10px;
   font-weight: bold;
 }
 .btn {
